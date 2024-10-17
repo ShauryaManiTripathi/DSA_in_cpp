@@ -10,6 +10,22 @@ class Graph{
             adj.resize(V);
             this->isDirected=isDirected;
         }
+
+        void builder(){
+            cout<<"Total of "<<adj.size()<<"Nodes"<<endl;
+            for(int i=0;i<adj.size();i++){
+                int temp;
+                cin>>temp;
+                if(temp==-1){
+                    continue;
+                }
+                else{
+                    int weight;
+                    cin>>weight;
+                    addEdge(i,temp,weight);
+                }
+            }
+        }
         
         void addEdge(int u, int v, int w=1){
             adj[u].push_back({v,w});
@@ -86,12 +102,9 @@ class Graph{
             return components;
         }
 
-        bool isDirected(){
-            return isDirected;
-        }
+        // SCC finding is best done with kosaraju algorithm
 
-        // SCC works best with kosaraju algorithm
-        
+
 
 
 
@@ -102,7 +115,7 @@ class Graph{
 int main() 
 {
     
-    Graph g(5);
+    Graph g(6);
     g.addEdge(0, 1);
     g.addEdge(0, 2);
     g.addEdge(1, 3);

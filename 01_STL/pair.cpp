@@ -24,12 +24,9 @@ void pairs(){
     debug(p2.first);
     debug(p2.second);
 
-
-
     pair<int, char> p3 = make_pair(2, 'a');
     debug(p3.first);
     debug(p3.second);
-
 
     pair<int, pair<int, char>> p4;
     p4.second.first = 3;

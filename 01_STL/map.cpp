@@ -8,8 +8,8 @@ void explainMap(){
     // ** stores values in sorted order of keys
     // ** stores unique keys only
     mp1[1]=2;
-    mp1.emplace(2,3);
-    mp1.insert({3,4});
+    mp1.emplace(3,3);// O(logn)
+    mp1.insert({2,4});// O(logn)
     for(auto it : mp1){
         cout<<it.first<<" "<<it.second<<", ";
     }
@@ -36,7 +36,7 @@ void explainmultimap(){
     // ** stores duplicate keys
     std::multimap<int,int> mp;
     mp.insert({1,2});
-    mp.insert({1,3});
+    mp.insert({1,3});// O(logn)
     mp.insert({2,4});
     mp.insert({3,5});
 
@@ -68,7 +68,7 @@ void explainUnorderedMap(){
     unordered_map<int,int> ump;
     ump[2] = 3;
     ump[1] = 2;
-    ump.insert({3,4});
+    ump.insert({3,4}); // O(1)
     ump.emplace(4,5);
     for(auto it : ump){
         cout<<it.first<<" "<<it.second<<", ";
@@ -86,8 +86,8 @@ void explainUnorderedMap(){
 
 int main(int argc, char const *argv[])
 {
-    //explainMap();
+    explainMap();
     //explainmultimap();
-    explainUnorderedMap();
+    //explainUnorderedMap();
     return 0;
 }

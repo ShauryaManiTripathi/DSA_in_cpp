@@ -15,7 +15,7 @@ void explainPQ()
     pq.pop();// O(logn)
     cout << pq.top() << endl; // 6
 
-    priority_queue<int, vector<int>, greater<int>> pq_min;
+    priority_queue<int, vector<int>, greater<int>> pq_min; 
     pq_min.push(3);
     pq_min.push(5);
     pq_min.push(7);

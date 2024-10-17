@@ -19,14 +19,13 @@ void iterators(vector<pair<int, int>> v)
 
     //similarly rend, and rbegin
 
-
     for(vector<pair<int, int>>::iterator it3 = v.begin(); it3!=v.end(); it3++){
         cout<<it3->first<<" "<<it3->second<<" ";
     }
     cout<<endl;
     //or with auto
     //auto is used to automatically detect the data type of the variable
-
+ 
     for(auto it4 = v.begin(); it4!=v.end(); it4++){
         cout<<it4->first<<" "<<it4->second<<" ";
     }
