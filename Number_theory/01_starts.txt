@@ -1,0 +1,29 @@
+BINARY NUMBERS
+- Signed/unsigned
+binary numbers
+- Set/Unset BITS
+- BIT Manipulation
+Tricks
+- Bit Masking
+Subset Generation using Masking
+
+- Gcd using euclid's algorithm
+
+- Binary Exponentiation
+BINARY EXP.
+- (A^B) % M
+- Inverse of a num
+(Fermet Theorem)
+- Large Exp. (When A and B in (A^B) % M are Very Large )
+
+- Prime and Divisors
+PRIME NUMBERS
+- Sieve Algorithm
+- Greatest/Lowest
+Common Divisor
+- Prime Calculations
+- Prime Fact.
+
+Extended Euclid's Algorithm
+
+Miller Rabin Algorithm
