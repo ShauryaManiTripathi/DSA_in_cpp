@@ -6,13 +6,9 @@ using namespace std;
 #define debug(x) cout << #x << " = " << x << endl
 
 void solve() {
-    ll a,b;
-    cin>>a>>b;
-    ll x=b-a;
-    if(a>=b)cout<<a<<endl;
-    else if(a-x>0)cout<<(a-x)<<endl;
-    else cout<<0<<endl;
-
+    int n;
+    cin>>n;
+    cout<<n+1<<endl;
 }
 
 int32_t main() {
