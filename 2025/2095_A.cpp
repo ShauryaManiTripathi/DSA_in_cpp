@@ -69,20 +69,7 @@ struct custom_hash {
 };
 
 void solve() {
-    int n;
-    read(n);
-    vi a(n, 0);
-    int temp=0;
-    FOR(i, 0, n - 1) {
-        read(temp);
-        a[temp - 1] = 1;
-    }
-    FOR(i, 0, n - 1) {
-        if (a[i] == 0) {
-            writln(i + 1);
-            return;
-        }
-    }
+    cout<<"puzzling"<<endl;
 }
 
 

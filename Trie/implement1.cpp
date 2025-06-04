@@ -70,8 +70,8 @@ public:
 int main(int argc, char const *argv[])
 {
 #ifndef ONLINE_JUDGE
-    freopen("/home/ironflesh/Desktop/DSA_in_cpp/input", "r", stdin);
-    freopen("/home/ironflesh/Desktop/DSA_in_cpp/output", "w", stdout);
+    freopen("/run/media/fullname/back/DSA_in_cpp/input", "r", stdin);
+    freopen("/run/media/fullname/back/DSA_in_cpp/output", "w", stdout);
 #endif
     // do a hard testing with edge cases 
     Trie* trie = new Trie();

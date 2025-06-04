@@ -1,0 +1,6 @@
+mapreduce	1
+is	1
+a	1
+powerful	1
+programming	1
+model	1

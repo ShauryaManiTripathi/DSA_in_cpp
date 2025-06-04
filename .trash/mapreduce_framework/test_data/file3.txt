@@ -1,0 +1,1 @@
+Multithreading enables parallel processing.

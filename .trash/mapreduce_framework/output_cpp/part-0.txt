@@ -1,0 +1,9 @@
+fox	1
+lazy	1
+mapreduce	1
+multithreading	1
+over	1
+processing	1
+quick	1
+the	2
+words	1

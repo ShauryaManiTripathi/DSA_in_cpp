@@ -69,20 +69,15 @@ struct custom_hash {
 };
 
 void solve() {
-    int n;
-    read(n);
-    vi a(n, 0);
-    int temp=0;
-    FOR(i, 0, n - 1) {
-        read(temp);
-        a[temp - 1] = 1;
+    ll n;
+    cin >> n;
+    ll sqrt_n = sqrtl(n);
+    if (sqrt_n * sqrt_n == n) {
+        cout<<0<<" "<< sqrt_n << endl;
+    } else {
+        cout << "-1" << endl;
     }
-    FOR(i, 0, n - 1) {
-        if (a[i] == 0) {
-            writln(i + 1);
-            return;
-        }
-    }
+
 }
 
 
@@ -177,7 +172,7 @@ int32_t main() {
 #endif
 
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 1; i <= t; ++i) {
         // cout << "Case #" << i << ": ";
         solve();

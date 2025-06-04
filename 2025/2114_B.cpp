@@ -69,20 +69,25 @@ struct custom_hash {
 };
 
 void solve() {
-    int n;
-    read(n);
-    vi a(n, 0);
-    int temp=0;
-    FOR(i, 0, n - 1) {
-        read(temp);
-        a[temp - 1] = 1;
+    int n,k;
+    read(n,k);
+    string s;
+    read(s);
+    // its a binary string , count no of ones and zeroes
+    int ones = count(all(s), '1');
+    int zeroes = n - ones;
+    int consumed = k*2;
+    int remaining = n - consumed;
+    int eitherofeach = remaining/2;
+    ones -= eitherofeach;
+    zeroes -= eitherofeach;
+    
+    if(ones/2+zeroes/2 == k && ones>=0 && zeroes>=0) {
+        writln("YES");
+        return;
     }
-    FOR(i, 0, n - 1) {
-        if (a[i] == 0) {
-            writln(i + 1);
-            return;
-        }
-    }
+    writln("NO");
+
 }
 
 
@@ -177,7 +182,7 @@ int32_t main() {
 #endif
 
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 1; i <= t; ++i) {
         // cout << "Case #" << i << ": ";
         solve();

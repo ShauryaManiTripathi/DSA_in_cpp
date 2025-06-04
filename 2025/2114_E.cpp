@@ -71,18 +71,68 @@ struct custom_hash {
 void solve() {
     int n;
     read(n);
-    vi a(n, 0);
-    int temp=0;
-    FOR(i, 0, n - 1) {
-        read(temp);
-        a[temp - 1] = 1;
+    
+    vl a(n + 1);
+    FOR(i, 1, n) read(a[i]);
+    
+    vvi adj(n + 1);
+    REP(i, n - 1) {
+        int v, u;
+        read(v, u);
+        adj[v].pb(u);
+        adj[u].pb(v);
     }
-    FOR(i, 0, n - 1) {
-        if (a[i] == 0) {
-            writln(i + 1);
-            return;
+    
+    vl dp_pos(n + 1, 0), dp_neg(n + 1, 0);  // Maximum alternating sums
+    vi parent(n + 1, 0);
+    
+    // BFS to compute the parent of each node
+    queue<int> q;
+    vb visited(n + 1, false);
+    q.push(1); // Root
+    visited[1] = true;
+    
+    while (!q.empty()) {
+        int curr = q.front();
+        q.pop();
+        
+        for (int child : adj[curr]) {
+            if (!visited[child]) {
+                visited[child] = true;
+                parent[child] = curr;
+                q.push(child);
+            }
         }
     }
+    
+    // Compute dp values
+    dp_pos[1] = a[1]; // For the root
+    dp_neg[1] = -a[1];
+    
+    // Do another BFS to compute the dp values from parent to children
+    visited.assign(n + 1, false);
+    q.push(1);
+    visited[1] = true;
+    
+    while (!q.empty()) {
+        int curr = q.front();
+        q.pop();
+        
+        for (int child : adj[curr]) {
+            if (!visited[child] && parent[child] == curr) {
+                visited[child] = true;
+                
+                dp_pos[child] = max(a[child], a[child] + max(0ll, dp_neg[parent[child]]));
+                dp_neg[child] = -a[child] + max(0ll, dp_pos[parent[child]]);
+                
+                q.push(child);
+            }
+        }
+    }
+    
+    // Output the threat value for each vertex
+    FOR(i, 1, n) write(dp_pos[i]);
+    cout << endl;
 }
 
 
@@ -138,7 +188,7 @@ void solve() {
 // ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⣿⣿⣿⣿⣿⣷⣀⠀⠀⠀⠈⠀⠛⢃⣾⣿⣿⣿⢏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠎⠀⠀
 // ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡜⢰⣿⣿⣿⣿⣿⣟⠀⠀⠀⠀⠀⠀⠐⣲⣿⣿⣿⡟⢂⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠀⠀
 // ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⣼⣿⣿⣿⣿⣿⣿⡇⣀⠀⠉⢀⣠⣼⣿⣿⣤⣤⡈⣤⢠⡈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀
-// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⣿⣿⣿⣿⣿⣿⣿⣿⡿⣶⣷⣾⡿⣿⣿⣿⣿⣿⣛⠛⠋⠁⠠⡀⢁⡀⢀⠀⠀⣀⠔⢡⠀⡄⡜⡄⠀
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⣿⣿⣿⣿⣿⣿⣿⣿⡿⣶⣷⣾⡿⣿⣿⣿⣿⣿⣛⠛⠋⠁⠠⡀⢀⡀⢀⠀⠀⣀⠔⢡⠀⡄⡜⡄⠀
 // ⢆⠒⠤⢒⠰⢂⠴⢀⠆⡐⠞⣇⢩⣿⢿⣿⣿⣿⣿⣿⡙⣤⡐⢀⡶⠤⠸⣿⣿⣿⣿⣿⡟⣖⠤⣦⢶⣳⡝⣳⢆⠈⠀⠈⠐⠈⠐⠘⠐⠀
 // ⠀⠈⡀⠄⠁⡀⠂⠀⡀⠘⢆⣹⣿⣾⣿⣿⣿⣿⡿⠣⣝⢀⡈⠉⠀⢀⠠⢹⡌⢿⠛⠙⣷⣿⣷⡝⢿⣷⡿⣵⡻⣍⠁⠆⠀⠀⠀⠀⠀⠀
 // ⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⢼⣿⣿⣿⣿⡿⡟⠀⠀⠀⠀⠠⡠⠈⠀⠀⠀⠱⡈⠱⡄⠀⢻⣿⡿⣺⡍⠛⠀⠈⠁⠀⢠⠀⠀⠀⠀⠀⠀
@@ -148,7 +198,7 @@ void solve() {
 // ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢿⣿⢰⣿⠁⠛⣆⠀⠀⠀⠀⠀⠀⣇⠀⠀⣼⣷⣦⣴⣦⣶⣼⡄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⠄⠀⠀
 // ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡎⣸⣿⣿⣿⣷⣦⣘⣦⣄⠀⠀⠀⠃⡏⣄⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⡛⠿⢿⣿⣿⣿⣿⡟⠀⠀⠀
 // ⣶⣴⣶⣴⣠⣤⣤⣤⣤⣧⣧⣿⣿⣿⣿⣿⣿⣿⣿⠷⣲⠟⢈⠏⠉⢯⣝⣛⠛⠛⢟⣻⢿⣿⣿⢿⡼⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-// ⠀⠀⣿⣿⣿⣿⣿⠉⠉⠻⣩⣿⣿⣿⣿⣿⣿⣯⡵⠒⠁⠀⠈⠁⠀⠀⠈⠉⠋⠛⠉⡁⣾⡿⠛⢿⡛⢿⡻⠻⣿⣟⠛⢻⣿⣿⣟⣿⣶⠦
+// ⠀⠀⣿⣿⣿⣿⠉⠉⠻⣩⣿⣿⣿⣿⣿⣿⣯⡵⠒⠁⠀⠈⠁⠀⠀⠈⠉⠋⠛⠉⡁⣾⡿⠛⢿⡛⢿⡻⠻⣿⣟⠛⢻⣿⣿⣟⣿⣶⠦
 // ⠀⠀⣿⣿⣿⣿⢿⠀⠀⠀⢼⣿⣿⣿⣿⣿⣿⣎⠀⠀⠄⠀⠀⠈⠀⠀⠀⠀⠀⡀⠊⢰⡟⡄⢒⠋⠈⡜⠁⠀⠘⠋⠀⠨⣿⣿⣿⣿⣯⠀
 // ⠀⠀⣿⣿⣿⣿⢸⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡿⠃⠄⠂⠀⠀⠀⠀⠀⠀⠀⠔⠀⠀⠀⠂⠈⠁⠀⠁⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⠀
 // ⠀⠀⣿⣿⣾⣿⢺⠀⠀⢰⣿⣿⣿⣿⣿⣿⡟⠁⠌⠀⠄⠁⡀⠀⠀⠀⠔⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⢸⠀
@@ -177,7 +227,7 @@ int32_t main() {
 #endif
 
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int i = 1; i <= t; ++i) {
         // cout << "Case #" << i << ": ";
         solve();
