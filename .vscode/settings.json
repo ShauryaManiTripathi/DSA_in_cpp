@@ -94,6 +94,8 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "auto-encrypt.password": "123456"
+        "auto-encrypt.password": "123456",
+        "flat_map": "cpp",
+        "flat_set": "cpp"
     },
 }
